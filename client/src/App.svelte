@@ -19,7 +19,19 @@
   });
 
   $: sortedCatalog = [...filteredCatalog].sort((a, b) => {
-    return b.popularity - a.popularity;
+    if (sortBy === "popularity") {
+      return b.popularity - a.popularity;
+    }
+
+    if (sortBy === "price-low") {
+      return a.price - b.price;
+    }
+
+    if (sortBy === "price-high") {
+      return b.price - a.price;
+    }
+
+    return 0;
   });
 
   $: categories = [...new Set(catalog.map((item) => item.category))];
@@ -48,6 +60,12 @@
       {/each}
     </select>
 
+    <select bind:value={sortBy}>
+      <option value="popularity">Most popular</option>
+      <option value="price-low">Price: Low to High</option>
+      <option value="price-high">Price: High to Low</option>
+    </select>
+
     <section>
       {#each sortedCatalog as item}
         <article>
@@ -55,6 +73,7 @@
           <p class="category">{item.category}</p>
           <p>{item.description}</p>
           <p>{item.popularity}</p>
+          <p>${item.price.toFixed(2)}</p>
         </article>
       {/each}
     </section>

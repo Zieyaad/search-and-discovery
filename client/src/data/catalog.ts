@@ -4,6 +4,7 @@ export type CatalogItem = {
   category: string;
   description: string;
   popularity: number;
+  price: number;
 };
 
 export const catalog: CatalogItem[] = [
@@ -13,6 +14,7 @@ export const catalog: CatalogItem[] = [
     category: "Burgers",
     description: "Beef patty with lettuce, tomato and sauce",
     popularity: 95,
+    price: 89.9,
   },
   {
     id: "2",
@@ -20,6 +22,7 @@ export const catalog: CatalogItem[] = [
     category: "Pizza",
     description: "Tomato, mozzarella and basil",
     popularity: 88,
+    price: 109.9,
   },
   {
     id: "3",
@@ -27,5 +30,6 @@ export const catalog: CatalogItem[] = [
     category: "Burgers",
     description: "Crispy chicken with lettuce and mayo",
     popularity: 91,
+    price: 79.9,
   },
 ];
