@@ -1,6 +1,7 @@
 <script lang="ts">
   import { catalog } from "./data/catalog";
   import SearchBar from "./components/SearchBar.svelte";
+  import ResultCard from "./components/ResultCard.svelte";
 
   let searchQuery = "";
   let selectedCategory = "";
@@ -79,13 +80,7 @@
         <p>No results found. Try a different search or category.</p>
       {:else}
         {#each sortedCatalog as item}
-          <article>
-            <h2>{item.name}</h2>
-            <p class="category">{item.category}</p>
-            <p>{item.description}</p>
-            <p>{item.popularity}</p>
-            <p>${item.price.toFixed(2)}</p>
-          </article>
+          <ResultCard {item} />
         {/each}
       {/if}
     </section>
