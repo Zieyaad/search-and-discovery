@@ -49,7 +49,10 @@
   </header>
 
   <main>
-    <SearchBar bind:searchQuery />
+    <SearchBar
+      bind:searchQuery
+      placeholder="Search burgers, pizza, chicken..."
+    />
 
     <select bind:value={selectedCategory}>
       <option value="">All categories</option>

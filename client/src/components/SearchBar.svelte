@@ -1,9 +1,6 @@
 <script lang="ts">
   export let searchQuery = "";
+  export let placeholder = "Search...";
 </script>
 
-<input
-  type="text"
-  placeholder="Search burgers, pizza, chicken..."
-  bind:value={searchQuery}
-/>
+<input type="text" {placeholder} bind:value={searchQuery} />
