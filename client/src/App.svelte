@@ -17,18 +17,27 @@
   });
 </script>
 
-<h1>Mr D Search</h1>
+<div class="page">
+  <header>
+    <h1>Mr D Search</h1>
+    <p>Find something to eat</p>
+  </header>
 
-<input
-  type="text"
-  placeholder="Search for food..."
-  bind:value={searchQuery}
-/>
+  <main>
+    <input
+      type="text"
+      placeholder="Search burgers, pizza, chicken..."
+      bind:value={searchQuery}
+    />
 
-{#each filteredCatalog as item}
-  <div>
-    <h2>{item.name}</h2>
-    <p>{item.category}</p>
-    <p>{item.description}</p>
-  </div>
-{/each}
+    <section>
+      {#each filteredCatalog as item}
+        <article>
+          <h2>{item.name}</h2>
+          <p class="category">{item.category}</p>
+          <p>{item.description}</p>
+        </article>
+      {/each}
+    </section>
+  </main>
+</div>
