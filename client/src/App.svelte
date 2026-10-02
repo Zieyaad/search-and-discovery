@@ -1,57 +1,43 @@
 <script lang="ts">
-  import { catalog } from "./data/catalog";
-  import SearchBar from "./components/SearchBar.svelte";
-  import ResultCard from "./components/ResultCard.svelte";
-  import SearchControls from "./components/SearchControls.svelte";
+  import { onMount } from "svelte";
+  import { catalog, type CatalogItem } from "./data/catalog";
+  import { searchCatalog } from "./api/search";
 
-  type SearchStatus = "success" | "loading" | "error";
+  import SearchBar from "./components/SearchBar.svelte";
+  import SearchControls from "./components/SearchControls.svelte";
+  import ResultCard from "./components/ResultCard.svelte";
 
   let searchQuery = "";
   let selectedCategory = "";
   let sortBy = "popularity";
-  let status: SearchStatus = "success";
 
-  // function simulateLoading() {
-  //   status = "loading";
+  let results: CatalogItem[] = [];
 
-  //   setTimeout(() => {
-  //     status = "success";
-  //   }, 500);
-  // }
+  let isLoading = false;
+  let errorMessage = "";
 
-  // Get the unique categories from the catalogue.
   $: categories = [...new Set(catalog.map((item) => item.category))];
 
-  // Filter the catalogue using the search text and selected category.
-  $: filteredCatalog = catalog.filter((item) => {
-    const query = searchQuery.toLowerCase().trim();
+  async function runSearch() {
+    isLoading = true;
+    errorMessage = "";
 
-    const matchesSearch =
-      !query ||
-      item.name.toLowerCase().includes(query) ||
-      item.category.toLowerCase().includes(query);
-
-    const matchesCategory =
-      !selectedCategory || item.category === selectedCategory;
-
-    return matchesSearch && matchesCategory;
-  });
-
-  // Sort the filtered results based on the selected sort option.
-  $: sortedCatalog = [...filteredCatalog].sort((a, b) => {
-    if (sortBy === "popularity") {
-      return b.popularity - a.popularity;
+    try {
+      results = await searchCatalog({
+        query: searchQuery,
+        category: selectedCategory,
+        sortBy,
+      });
+    } catch (error) {
+      console.error(error);
+      errorMessage = "Something went wrong while searching.";
+    } finally {
+      isLoading = false;
     }
+  }
 
-    if (sortBy === "price-low") {
-      return a.price - b.price;
-    }
-
-    if (sortBy === "price-high") {
-      return b.price - a.price;
-    }
-
-    return 0;
+  onMount(() => {
+    runSearch();
   });
 </script>
 
@@ -69,15 +55,22 @@
 
     <SearchControls bind:selectedCategory bind:sortBy {categories} />
 
+    <button on:click={runSearch}> Search </button>
+
     <p>
-      {sortedCatalog.length} result{sortedCatalog.length === 1 ? "" : "s"}
+      {results.length}
+      result{results.length === 1 ? "" : "s"}
     </p>
 
     <section>
-      {#if sortedCatalog.length === 0}
+      {#if isLoading}
+        <p>Searching...</p>
+      {:else if errorMessage}
+        <p>{errorMessage}</p>
+      {:else if results.length === 0}
         <p>No results found. Try a different search or category.</p>
       {:else}
-        {#each sortedCatalog as item}
+        {#each results as item}
           <ResultCard {item} />
         {/each}
       {/if}
