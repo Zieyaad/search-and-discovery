@@ -1,5 +1,6 @@
 import catalog from "../data/catalog.js";
 import type { CatalogItem } from "../types/catalog.js";
+import { getProviderData, type ProviderData } from "./upstreamProvider.js";
 
 export type SearchParams = {
   query: string;
@@ -7,7 +8,11 @@ export type SearchParams = {
   sortBy: string;
 };
 
-export function searchCatalog(params: SearchParams): CatalogItem[] {
+export type SearchResult = CatalogItem & ProviderData;
+
+export async function searchCatalog(
+  params: SearchParams,
+): Promise<SearchResult[]> {
   const query = params.query.toLowerCase().trim();
 
   const filteredCatalog = catalog.filter((item) => {
@@ -30,5 +35,27 @@ export function searchCatalog(params: SearchParams): CatalogItem[] {
     return 0;
   });
 
-  return sortedCatalog;
+  const results = await Promise.all(
+    sortedCatalog.map(async (item) => {
+      try {
+        const providerData = await getProviderData(item);
+
+        return {
+          ...item,
+          ...providerData,
+        };
+      } catch (error) {
+        console.error(`Provider failed for ${item.name}:`, error);
+
+        return {
+          ...item,
+          price: 0,
+          available: false,
+          deliveryEstimate: "Currently unavailable",
+        };
+      }
+    }),
+  );
+
+  return results;
 }

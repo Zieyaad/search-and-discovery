@@ -4,18 +4,14 @@ import { searchCatalog } from "../services/searchService.js";
 
 const router = Router();
 
-router.get("/search", (req, res) => {
+router.get("/search", async (req, res) => {
   const query = typeof req.query.q === "string" ? req.query.q : "";
   const category =
     typeof req.query.category === "string" ? req.query.category : "";
   const sortBy =
     typeof req.query.sort === "string" ? req.query.sort : "popularity";
 
-  const results = searchCatalog({
-    query,
-    category,
-    sortBy,
-  });
+  const results = await searchCatalog({ query, category, sortBy });
 
   res.json(results);
 });
