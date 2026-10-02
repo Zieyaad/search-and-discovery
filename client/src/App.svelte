@@ -66,16 +66,24 @@
       <option value="price-high">Price: High to Low</option>
     </select>
 
+    <p>
+      {sortedCatalog.length} result{sortedCatalog.length === 1 ? "" : "s"}
+    </p>
+
     <section>
-      {#each sortedCatalog as item}
-        <article>
-          <h2>{item.name}</h2>
-          <p class="category">{item.category}</p>
-          <p>{item.description}</p>
-          <p>{item.popularity}</p>
-          <p>${item.price.toFixed(2)}</p>
-        </article>
-      {/each}
+      {#if sortedCatalog.length === 0}
+        <p>No results found. Try a different search or category.</p>
+      {:else}
+        {#each sortedCatalog as item}
+          <article>
+            <h2>{item.name}</h2>
+            <p class="category">{item.category}</p>
+            <p>{item.description}</p>
+            <p>{item.popularity}</p>
+            <p>${item.price.toFixed(2)}</p>
+          </article>
+        {/each}
+      {/if}
     </section>
   </main>
 </div>
