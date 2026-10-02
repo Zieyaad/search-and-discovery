@@ -1,10 +1,15 @@
 <script lang="ts">
   import { catalog } from "./data/catalog";
+  import SearchBar from "./components/SearchBar.svelte";
 
   let searchQuery = "";
   let selectedCategory = "";
   let sortBy = "popularity";
 
+  // Get the unique categories from the catalogue.
+  $: categories = [...new Set(catalog.map((item) => item.category))];
+
+  // Filter the catalogue using the search text and selected category.
   $: filteredCatalog = catalog.filter((item) => {
     const query = searchQuery.toLowerCase().trim();
 
@@ -15,9 +20,11 @@
 
     const matchesCategory =
       !selectedCategory || item.category === selectedCategory;
+
     return matchesSearch && matchesCategory;
   });
 
+  // Sort the filtered results based on the selected sort option.
   $: sortedCatalog = [...filteredCatalog].sort((a, b) => {
     if (sortBy === "popularity") {
       return b.popularity - a.popularity;
@@ -33,8 +40,6 @@
 
     return 0;
   });
-
-  $: categories = [...new Set(catalog.map((item) => item.category))];
 </script>
 
 <div class="page">
@@ -44,11 +49,7 @@
   </header>
 
   <main>
-    <input
-      type="text"
-      placeholder="Search burgers, pizza, chicken..."
-      bind:value={searchQuery}
-    />
+    <SearchBar bind:searchQuery />
 
     <select bind:value={selectedCategory}>
       <option value="">All categories</option>
