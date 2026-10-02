@@ -2,10 +2,22 @@
   import { catalog } from "./data/catalog";
   import SearchBar from "./components/SearchBar.svelte";
   import ResultCard from "./components/ResultCard.svelte";
+  import SearchControls from "./components/SearchControls.svelte";
+
+  type SearchStatus = "success" | "loading" | "error";
 
   let searchQuery = "";
   let selectedCategory = "";
   let sortBy = "popularity";
+  let status: SearchStatus = "success";
+
+  // function simulateLoading() {
+  //   status = "loading";
+
+  //   setTimeout(() => {
+  //     status = "success";
+  //   }, 500);
+  // }
 
   // Get the unique categories from the catalogue.
   $: categories = [...new Set(catalog.map((item) => item.category))];
@@ -55,21 +67,7 @@
       placeholder="Search burgers, pizza, chicken..."
     />
 
-    <select bind:value={selectedCategory}>
-      <option value="">All categories</option>
-
-      {#each categories as category}
-        <option value={category}>
-          {category}
-        </option>
-      {/each}
-    </select>
-
-    <select bind:value={sortBy}>
-      <option value="popularity">Most popular</option>
-      <option value="price-low">Price: Low to High</option>
-      <option value="price-high">Price: High to Low</option>
-    </select>
+    <SearchControls bind:selectedCategory bind:sortBy {categories} />
 
     <p>
       {sortedCatalog.length} result{sortedCatalog.length === 1 ? "" : "s"}
