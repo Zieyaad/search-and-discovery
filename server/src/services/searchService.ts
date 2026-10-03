@@ -10,12 +10,13 @@ export type SearchParams = {
 
 export type SearchResult = CatalogItem & ProviderData;
 
-export async function searchCatalog(
+export function filterAndSortCatalog(
+  items: CatalogItem[],
   params: SearchParams,
-): Promise<SearchResult[]> {
+): CatalogItem[] {
   const query = params.query.toLowerCase().trim();
 
-  const filteredCatalog = catalog.filter((item) => {
+  const filteredCatalog = items.filter((item) => {
     const matchesSearch =
       !query ||
       item.name.toLowerCase().includes(query) ||
@@ -26,6 +27,20 @@ export async function searchCatalog(
 
     return matchesSearch && matchesCategory;
   });
+
+  return [...filteredCatalog].sort((a, b) => {
+    if (params.sortBy === "popularity") {
+      return b.popularity - a.popularity;
+    }
+
+    return 0;
+  });
+}
+
+export async function searchCatalog(
+  params: SearchParams,
+): Promise<SearchResult[]> {
+  const filteredCatalog = filterAndSortCatalog(catalog, params);
 
   const results = await Promise.all(
     filteredCatalog.map(async (item) => {
@@ -49,19 +64,5 @@ export async function searchCatalog(
     }),
   );
 
-  return results.sort((a, b) => {
-    if (params.sortBy === "popularity") {
-      return b.popularity - a.popularity;
-    }
-
-    if (params.sortBy === "price-low") {
-      return a.price - b.price;
-    }
-
-    if (params.sortBy === "price-high") {
-      return b.price - a.price;
-    }
-
-    return 0;
-  });
+  return results;
 }
