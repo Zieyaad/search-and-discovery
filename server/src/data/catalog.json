@@ -68,5 +68,285 @@
     "category": "Drinks",
     "description": "Creamy chocolate milkshake",
     "popularity": 90
+  },
+  {
+    "id": "11",
+    "name": "Double Cheeseburger",
+    "category": "Burgers",
+    "description": "Two beef patties with cheddar, pickles and burger sauce",
+    "popularity": 92
+  },
+  {
+    "id": "12",
+    "name": "Mushroom Swiss Burger",
+    "category": "Burgers",
+    "description": "Beef patty topped with sauteed mushrooms and Swiss cheese",
+    "popularity": 84
+  },
+  {
+    "id": "13",
+    "name": "Veggie Burger",
+    "category": "Burgers",
+    "description": "Plant-based patty with lettuce, tomato and herb mayo",
+    "popularity": 79
+  },
+  {
+    "id": "14",
+    "name": "Spicy Jalapeno Burger",
+    "category": "Burgers",
+    "description": "Beef patty with jalapenos, pepper jack and chipotle sauce",
+    "popularity": 87
+  },
+  {
+    "id": "15",
+    "name": "Crispy Fish Burger",
+    "category": "Burgers",
+    "description": "Golden fish fillet with lettuce and tartar sauce",
+    "popularity": 81
+  },
+  {
+    "id": "16",
+    "name": "Four Cheese Pizza",
+    "category": "Pizza",
+    "description": "Mozzarella, cheddar, blue cheese and parmesan",
+    "popularity": 85
+  },
+  {
+    "id": "17",
+    "name": "BBQ Chicken Pizza",
+    "category": "Pizza",
+    "description": "Smoky barbecue sauce, grilled chicken and red onion",
+    "popularity": 90
+  },
+  {
+    "id": "18",
+    "name": "Veggie Supreme Pizza",
+    "category": "Pizza",
+    "description": "Bell peppers, mushrooms, olives and red onion",
+    "popularity": 83
+  },
+  {
+    "id": "19",
+    "name": "Hawaiian Pizza",
+    "category": "Pizza",
+    "description": "Ham and pineapple with mozzarella and tomato sauce",
+    "popularity": 76
+  },
+  {
+    "id": "20",
+    "name": "Meat Lovers Pizza",
+    "category": "Pizza",
+    "description": "Pepperoni, sausage, ham and crispy bacon",
+    "popularity": 91
+  },
+  {
+    "id": "21",
+    "name": "Buffalo Chicken Pizza",
+    "category": "Pizza",
+    "description": "Spicy buffalo chicken, mozzarella and ranch drizzle",
+    "popularity": 88
+  },
+  {
+    "id": "22",
+    "name": "Lemon Herb Chicken",
+    "category": "Chicken",
+    "description": "Grilled chicken breast with lemon, herbs and garlic",
+    "popularity": 80
+  },
+  {
+    "id": "23",
+    "name": "Chicken Tenders",
+    "category": "Chicken",
+    "description": "Hand-breaded chicken strips served with dipping sauce",
+    "popularity": 92
+  },
+  {
+    "id": "24",
+    "name": "Honey Mustard Chicken",
+    "category": "Chicken",
+    "description": "Grilled chicken glazed with sweet honey mustard",
+    "popularity": 83
+  },
+  {
+    "id": "25",
+    "name": "Cajun Chicken Wrap",
+    "category": "Chicken",
+    "description": "Cajun-spiced chicken, greens and ranch in a soft wrap",
+    "popularity": 86
+  },
+  {
+    "id": "26",
+    "name": "Lemon Pepper Wings",
+    "category": "Chicken",
+    "description": "Crispy chicken wings tossed in lemon pepper seasoning",
+    "popularity": 87
+  },
+  {
+    "id": "27",
+    "name": "Sweet Potato Fries",
+    "category": "Sides",
+    "description": "Crispy sweet potato fries with a pinch of sea salt",
+    "popularity": 88
+  },
+  {
+    "id": "28",
+    "name": "Loaded Nachos",
+    "category": "Sides",
+    "description": "Tortilla chips with cheese, salsa, sour cream and jalapenos",
+    "popularity": 90
+  },
+  {
+    "id": "29",
+    "name": "Onion Rings",
+    "category": "Sides",
+    "description": "Golden battered onion rings served with smoky dip",
+    "popularity": 80
+  },
+  {
+    "id": "30",
+    "name": "Mac and Cheese",
+    "category": "Sides",
+    "description": "Creamy macaroni baked with a golden cheese topping",
+    "popularity": 89
+  },
+  {
+    "id": "31",
+    "name": "Garden Side Salad",
+    "category": "Sides",
+    "description": "Mixed greens, cucumber, tomato and house vinaigrette",
+    "popularity": 72
+  },
+  {
+    "id": "32",
+    "name": "Mozzarella Sticks",
+    "category": "Sides",
+    "description": "Breaded mozzarella sticks with marinara dipping sauce",
+    "popularity": 91
+  },
+  {
+    "id": "33",
+    "name": "Vanilla Cheesecake",
+    "category": "Desserts",
+    "description": "Classic baked cheesecake with a buttery biscuit base",
+    "popularity": 88
+  },
+  {
+    "id": "34",
+    "name": "Apple Pie",
+    "category": "Desserts",
+    "description": "Warm spiced apples wrapped in flaky pastry",
+    "popularity": 78
+  },
+  {
+    "id": "35",
+    "name": "Strawberry Sundae",
+    "category": "Desserts",
+    "description": "Vanilla ice cream with strawberry sauce and whipped cream",
+    "popularity": 84
+  },
+  {
+    "id": "36",
+    "name": "Salted Caramel Cookie",
+    "category": "Desserts",
+    "description": "Soft-baked cookie with chocolate chips and salted caramel",
+    "popularity": 82
+  },
+  {
+    "id": "37",
+    "name": "Lemon Tart",
+    "category": "Desserts",
+    "description": "Tangy lemon curd in a crisp pastry shell",
+    "popularity": 75
+  },
+  {
+    "id": "38",
+    "name": "Vanilla Milkshake",
+    "category": "Drinks",
+    "description": "Thick vanilla milkshake blended with real ice cream",
+    "popularity": 85
+  },
+  {
+    "id": "39",
+    "name": "Strawberry Milkshake",
+    "category": "Drinks",
+    "description": "Creamy milkshake blended with sweet strawberries",
+    "popularity": 83
+  },
+  {
+    "id": "40",
+    "name": "Fresh Lemonade",
+    "category": "Drinks",
+    "description": "Freshly squeezed lemons with a touch of sweetness",
+    "popularity": 86
+  },
+  {
+    "id": "41",
+    "name": "Iced Tea",
+    "category": "Drinks",
+    "description": "Chilled black tea served over ice with lemon",
+    "popularity": 77
+  },
+  {
+    "id": "42",
+    "name": "Mango Smoothie",
+    "category": "Drinks",
+    "description": "Blended mango, yogurt and a splash of orange juice",
+    "popularity": 82
+  },
+  {
+    "id": "43",
+    "name": "Cold Brew Coffee",
+    "category": "Drinks",
+    "description": "Smooth slow-steeped coffee served chilled",
+    "popularity": 80
+  },
+  {
+    "id": "44",
+    "name": "Chicken Caesar Salad",
+    "category": "Salads",
+    "description": "Grilled chicken, romaine, parmesan and Caesar dressing",
+    "popularity": 89
+  },
+  {
+    "id": "45",
+    "name": "Mediterranean Salad",
+    "category": "Salads",
+    "description": "Cucumber, tomato, olives, feta and lemon dressing",
+    "popularity": 81
+  },
+  {
+    "id": "46",
+    "name": "Crispy Chicken Salad",
+    "category": "Salads",
+    "description": "Crispy chicken over mixed greens with honey mustard",
+    "popularity": 84
+  },
+  {
+    "id": "47",
+    "name": "Classic Beef Hot Dog",
+    "category": "Hot Dogs",
+    "description": "Grilled beef sausage in a toasted bun with mustard",
+    "popularity": 79
+  },
+  {
+    "id": "48",
+    "name": "Chili Cheese Dog",
+    "category": "Hot Dogs",
+    "description": "Beef sausage topped with house chili and melted cheese",
+    "popularity": 85
+  },
+  {
+    "id": "49",
+    "name": "Grilled Cheese Sandwich",
+    "category": "Sandwiches",
+    "description": "Toasted sourdough filled with melted cheddar and mozzarella",
+    "popularity": 83
+  },
+  {
+    "id": "50",
+    "name": "Turkey Club Sandwich",
+    "category": "Sandwiches",
+    "description": "Roast turkey, bacon, lettuce and tomato on toasted bread",
+    "popularity": 87
   }
 ]

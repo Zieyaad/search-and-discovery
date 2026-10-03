@@ -66,25 +66,59 @@
   });
 </script>
 
-<div class="page">
-  <header>
-    <h1>Mr D Search</h1>
-    <p>Find something to eat near you</p>
+<div class="app-shell">
+  <header class="masthead">
+    <a class="brand" href="/" aria-label="Mr D home">
+      <span class="brand-mark" aria-hidden="true"
+        ><span>MR</span><strong>D</strong></span
+      >
+      <span class="brand-name">Mr D</span>
+    </a>
+    <span class="masthead-note"
+      ><span class="live-dot"></span>Good food, delivered</span
+    >
   </header>
 
-  <main>
-    <div class="search-toolbar">
-      <SearchBar
-        bind:searchQuery
-        placeholder="Search burgers, pizza, chicken..."
+  <main class="page-content">
+    <section class="hero" aria-labelledby="hero-title">
+      <img
+        class="hero-image"
+        src="https://img.mrdfood.com/800x0/web-v2/f9330441-5db4-4517-a30c-cc88047c3576.jpg"
+        alt="Freshly prepared wraps and hummus"
       />
+      <div class="hero-copy">
+        <p class="eyebrow">RESTAURANTS <span>/</span> FOOD SEARCH</p>
+        <h1 id="hero-title">Find something<br />good to eat.</h1>
+        <p>Discover a new favourite from the menu.</p>
+      </div>
+      <span class="hero-sticker" aria-hidden="true"
+        >GOOD<br />MOOD<br /><strong>FOOD</strong></span
+      >
+    </section>
 
-      <SearchControls bind:selectedCategory bind:sortBy {categories} />
+    <section class="discovery" aria-labelledby="search-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">YOUR NEXT MEAL</p>
+          <h2 id="search-title">What are you craving?</h2>
+        </div>
+        <p class="section-note">Search the menu and find your pick.</p>
+      </div>
 
-      <button on:click={runSearch} disabled={isLoading}>
-        {isLoading ? "Searching..." : "Search"}
-      </button>
-    </div>
+      <div class="search-toolbar">
+        <SearchBar
+          bind:searchQuery
+          placeholder="Search burgers, pizza, chicken..."
+        />
+
+        <SearchControls bind:selectedCategory bind:sortBy {categories} />
+
+        <button on:click={runSearch} disabled={isLoading}>
+          {isLoading ? "Searching..." : "Search menu"}
+          <span aria-hidden="true">&#8594;</span>
+        </button>
+      </div>
+    </section>
 
     <div class="results-header">
       <p>
@@ -93,17 +127,19 @@
       </p>
     </div>
 
-    <section>
+    <section class="results-grid" aria-label="Menu search results">
       {#if isLoading}
-        <p>Searching...</p>
+        <p class="message">Searching...</p>
       {:else if errorMessage}
-        <div class="error">
+        <div class="error message">
           <p>{errorMessage}</p>
 
-          <button on:click={runSearch}> Try again </button>
+          <button on:click={runSearch}>Try again</button>
         </div>
       {:else if results.length === 0}
-        <p>No results found. Try a different search or category.</p>
+        <p class="message">
+          No results found. Try a different search or category.
+        </p>
       {:else}
         {#each results as item}
           <ResultCard {item} />
