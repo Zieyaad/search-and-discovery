@@ -4,30 +4,37 @@
   export let item: SearchResult;
 </script>
 
-<article>
-  <h2>{item.name}</h2>
+<article class:unavailable={!item.available}>
+  <div class="card-header">
+    <div>
+      <h2>{item.name}</h2>
+      <p class="category">{item.category}</p>
+    </div>
 
-  <p class="category">
-    {item.category}
-  </p>
+    {#if item.available}
+      <span class="status available">Available</span>
+    {:else}
+      <span class="status unavailable">Unavailable</span>
+    {/if}
+  </div>
 
-  <p>
+  <p class="description">
     {item.description}
   </p>
 
-  <p>
-    R{item.price.toFixed(2)}
-  </p>
+  <div class="card-footer">
+    <div>
+      <strong>R{item.price.toFixed(2)}</strong>
 
-  {#if item.available}
-    <p>
-      Available · {item.deliveryEstimate}
-    </p>
-  {:else}
-    <p>Currently unavailable</p>
-  {/if}
+      {#if item.available}
+        <span>{item.deliveryEstimate}</span>
+      {:else}
+        <span>{item.deliveryEstimate}</span>
+      {/if}
+    </div>
 
-  <p>
-    Popularity: {item.popularity}
-  </p>
+    <span class="popularity">
+      Popularity: {item.popularity}
+    </span>
+  </div>
 </article>

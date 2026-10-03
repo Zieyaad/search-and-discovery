@@ -69,24 +69,29 @@
 <div class="page">
   <header>
     <h1>Mr D Search</h1>
-    <p>Find something to eat</p>
+    <p>Find something to eat near you</p>
   </header>
 
   <main>
-    <SearchBar
-      bind:searchQuery
-      placeholder="Search burgers, pizza, chicken..."
-    />
+    <div class="search-toolbar">
+      <SearchBar
+        bind:searchQuery
+        placeholder="Search burgers, pizza, chicken..."
+      />
 
-    <SearchControls bind:selectedCategory bind:sortBy {categories} />
+      <SearchControls bind:selectedCategory bind:sortBy {categories} />
 
-    <button on:click={runSearch} disabled={isLoading}>
-      {isLoading ? "Searching..." : "Search"}
-    </button>
-    <p>
-      {results.length}
-      result{results.length === 1 ? "" : "s"}
-    </p>
+      <button on:click={runSearch} disabled={isLoading}>
+        {isLoading ? "Searching..." : "Search"}
+      </button>
+    </div>
+
+    <div class="results-header">
+      <p>
+        {results.length}
+        result{results.length === 1 ? "" : "s"}
+      </p>
+    </div>
 
     <section>
       {#if isLoading}
