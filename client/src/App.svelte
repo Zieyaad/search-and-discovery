@@ -1,7 +1,10 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { catalog, type CatalogItem } from "./data/catalog";
+
+  import { catalog } from "./data/catalog";
   import { searchCatalog } from "./api/search";
+
+  import type { SearchResult } from "./types/search";
 
   import SearchBar from "./components/SearchBar.svelte";
   import SearchControls from "./components/SearchControls.svelte";
@@ -11,7 +14,7 @@
   let selectedCategory = "";
   let sortBy = "popularity";
 
-  let results: CatalogItem[] = [];
+  let results: SearchResult[] = [];
 
   let isLoading = false;
   let errorMessage = "";

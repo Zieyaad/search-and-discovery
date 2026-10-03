@@ -1,13 +1,33 @@
 <script lang="ts">
-  import type { CatalogItem } from "../data/catalog";
+  import type { SearchResult } from "../types/search";
 
-  export let item: CatalogItem;
+  export let item: SearchResult;
 </script>
 
 <article>
   <h2>{item.name}</h2>
-  <p class="category">{item.category}</p>
-  <p>{item.description}</p>
-  <p>R{item.price.toFixed(2)}</p>
-  <p>Popularity: {item.popularity}</p>
+
+  <p class="category">
+    {item.category}
+  </p>
+
+  <p>
+    {item.description}
+  </p>
+
+  <p>
+    R{item.price.toFixed(2)}
+  </p>
+
+  {#if item.available}
+    <p>
+      Available · {item.deliveryEstimate}
+    </p>
+  {:else}
+    <p>Currently unavailable</p>
+  {/if}
+
+  <p>
+    Popularity: {item.popularity}
+  </p>
 </article>
