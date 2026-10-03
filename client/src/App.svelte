@@ -1,8 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  import { catalog } from "./data/catalog";
-  import { searchCatalog } from "./api/search";
+  import { getCategories, searchCatalog } from "./api/search";
 
   import type { SearchResult } from "./types/search";
 
@@ -14,12 +13,11 @@
   let selectedCategory = "";
   let sortBy = "popularity";
 
+  let categories: string[] = [];
   let results: SearchResult[] = [];
 
   let isLoading = false;
   let errorMessage = "";
-
-  $: categories = [...new Set(catalog.map((item) => item.category))];
 
   async function runSearch() {
     isLoading = true;
@@ -39,8 +37,32 @@
     }
   }
 
+  async function loadInitialData() {
+    isLoading = true;
+    errorMessage = "";
+
+    try {
+      const [initialResults, categoryResults] = await Promise.all([
+        searchCatalog({
+          query: "",
+          category: "",
+          sortBy: "popularity",
+        }),
+        getCategories(),
+      ]);
+
+      results = initialResults;
+      categories = categoryResults;
+    } catch (error) {
+      console.error(error);
+      errorMessage = "Something went wrong while loading the app.";
+    } finally {
+      isLoading = false;
+    }
+  }
+
   onMount(() => {
-    runSearch();
+    loadInitialData();
   });
 </script>
 

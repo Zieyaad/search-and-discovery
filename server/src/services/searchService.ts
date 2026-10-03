@@ -27,16 +27,8 @@ export async function searchCatalog(
     return matchesSearch && matchesCategory;
   });
 
-  const sortedCatalog = [...filteredCatalog].sort((a, b) => {
-    if (params.sortBy === "popularity") {
-      return b.popularity - a.popularity;
-    }
-
-    return 0;
-  });
-
   const results = await Promise.all(
-    sortedCatalog.map(async (item) => {
+    filteredCatalog.map(async (item) => {
       try {
         const providerData = await getProviderData(item);
 
@@ -57,5 +49,19 @@ export async function searchCatalog(
     }),
   );
 
-  return results;
+  return results.sort((a, b) => {
+    if (params.sortBy === "popularity") {
+      return b.popularity - a.popularity;
+    }
+
+    if (params.sortBy === "price-low") {
+      return a.price - b.price;
+    }
+
+    if (params.sortBy === "price-high") {
+      return b.price - a.price;
+    }
+
+    return 0;
+  });
 }

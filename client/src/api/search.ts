@@ -25,3 +25,13 @@ export async function searchCatalog(
 
   return response.json();
 }
+
+export async function getCategories(): Promise<string[]> {
+  const response = await fetch("/api/categories");
+
+  if (!response.ok) {
+    throw new Error("Failed to load categories");
+  }
+
+  return response.json();
+}
