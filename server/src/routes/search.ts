@@ -1,7 +1,16 @@
 import { Router } from "express";
 
 import catalog from "../data/catalog.js";
-import { searchCatalog } from "../services/searchService.js";
+
+import {
+  searchCatalog,
+  SORT_OPTIONS,
+  type SortOption,
+} from "../services/searchService.js";
+
+function isSortOption(value: string): value is SortOption {
+  return SORT_OPTIONS.includes(value as SortOption);
+}
 
 const router = Router();
 
@@ -17,13 +26,22 @@ router.get("/search", async (req, res) => {
   const category =
     typeof req.query.category === "string" ? req.query.category : "";
 
-  const sortBy =
+  const sort =
     typeof req.query.sort === "string" ? req.query.sort : "popularity";
+
+  if (!isSortOption(sort)) {
+    res.status(400).json({
+      error: "Invalid sort option",
+      validOptions: SORT_OPTIONS,
+    });
+
+    return;
+  }
 
   const results = await searchCatalog({
     query,
     category,
-    sortBy,
+    sortBy: sort,
   });
 
   res.json(results);

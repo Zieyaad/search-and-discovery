@@ -71,4 +71,15 @@ describe("filterAndSortCatalog", () => {
 
     assert.equal(results.length, 0);
   });
+
+  test("sorts by popularity descending", () => {
+    const results = filterAndSortCatalog(testCatalog, {
+      query: "",
+      category: "Burgers",
+      sortBy: "popularity",
+    });
+
+    assert.equal(results[0]?.name, "Classic Beef Burger");
+    assert.equal(results[1]?.name, "Chicken Burger");
+  });
 });

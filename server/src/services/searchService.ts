@@ -2,10 +2,14 @@ import catalog from "../data/catalog.js";
 import type { CatalogItem } from "../types/catalog.js";
 import { getProviderData, type ProviderData } from "./upstreamProvider.js";
 
+export const SORT_OPTIONS = ["popularity", "price-low", "price-high"] as const;
+
+export type SortOption = (typeof SORT_OPTIONS)[number];
+
 export type SearchParams = {
   query: string;
   category: string;
-  sortBy: string;
+  sortBy: SortOption;
 };
 
 export type SearchResult = CatalogItem & ProviderData;
@@ -64,5 +68,23 @@ export async function searchCatalog(
     }),
   );
 
-  return results;
+  return results.sort((a, b) => {
+    if (a.available !== b.available) {
+      return a.available ? -1 : 1;
+    }
+
+    if (params.sortBy === "popularity") {
+      return b.popularity - a.popularity;
+    }
+
+    if (params.sortBy === "price-low") {
+      return a.price - b.price;
+    }
+
+    if (params.sortBy === "price-high") {
+      return b.price - a.price;
+    }
+
+    return 0;
+  });
 }

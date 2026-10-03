@@ -80,3 +80,14 @@ select {
   font-size: 16px;
   background: white;
 }
+
+.error {
+  padding: 20px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.error p {
+  margin-top: 0;
+}

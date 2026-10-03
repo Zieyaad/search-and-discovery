@@ -80,8 +80,9 @@
 
     <SearchControls bind:selectedCategory bind:sortBy {categories} />
 
-    <button on:click={runSearch}> Search </button>
-
+    <button on:click={runSearch} disabled={isLoading}>
+      {isLoading ? "Searching..." : "Search"}
+    </button>
     <p>
       {results.length}
       result{results.length === 1 ? "" : "s"}
@@ -91,7 +92,11 @@
       {#if isLoading}
         <p>Searching...</p>
       {:else if errorMessage}
-        <p>{errorMessage}</p>
+        <div class="error">
+          <p>{errorMessage}</p>
+
+          <button on:click={runSearch}> Try again </button>
+        </div>
       {:else if results.length === 0}
         <p>No results found. Try a different search or category.</p>
       {:else}
