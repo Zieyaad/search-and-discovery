@@ -1,5 +1,6 @@
 import type { SearchParams, SearchResult } from "../types/search.ts";
 
+/** Sends the selected filters to the search API and returns matching items. */
 export async function searchCatalog(
   params: SearchParams,
 ): Promise<SearchResult[]> {
@@ -26,6 +27,7 @@ export async function searchCatalog(
   return response.json();
 }
 
+/** Loads category names for the search filters. */
 export async function getCategories(): Promise<string[]> {
   const response = await fetch("/api/categories");
 

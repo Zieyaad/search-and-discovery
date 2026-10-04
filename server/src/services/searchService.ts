@@ -1,3 +1,4 @@
+/** This module searches and filters the catalog, adds price and delivery data and sorts results with unavailable items last. */
 import catalog from "../data/catalog.js";
 import type { CatalogItem } from "../types/catalog.js";
 import { getProviderData, type ProviderData } from "./upstreamProvider.js";
@@ -14,6 +15,7 @@ export type SearchParams = {
 
 export type SearchResult = CatalogItem & ProviderData;
 
+// Filters by query and category, then sorts by popularity when requested.
 export function filterAndSortCatalog(
   items: CatalogItem[],
   params: SearchParams,
@@ -41,6 +43,7 @@ export function filterAndSortCatalog(
   });
 }
 
+// Adds provider data to matching items, handles provider failures and sorts the results.
 export async function searchCatalog(
   params: SearchParams,
 ): Promise<SearchResult[]> {

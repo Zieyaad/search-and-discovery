@@ -1,3 +1,4 @@
+/** This module simulates an upstream provider with network delays and occasional failures, then returns sample price and delivery data for a catalog item. */
 import type { CatalogItem } from "../types/catalog.js";
 
 export type ProviderData = {
@@ -6,12 +7,14 @@ export type ProviderData = {
   deliveryEstimate: string;
 };
 
+// Waits for the given time to simulate network latency.
 function delay(ms: number): Promise<void> {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
 }
 
+// Returns sample provider data after a delay or throws if the provider is unavailable.
 export async function getProviderData(
   item: CatalogItem,
 ): Promise<ProviderData> {

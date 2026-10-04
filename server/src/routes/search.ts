@@ -1,3 +1,4 @@
+/** This router returns catalog categories and search results and checks that sort options are valid. */
 import { Router } from "express";
 
 import catalog from "../data/catalog.js";
@@ -8,18 +9,21 @@ import {
   type SortOption,
 } from "../services/searchService.js";
 
+// Keep accepted sort values in sync with the search service options.
 function isSortOption(value: string): value is SortOption {
   return SORT_OPTIONS.includes(value as SortOption);
 }
 
 const router = Router();
 
+// Return each catalog category once, in alphabetical order.
 router.get("/categories", (req, res) => {
   const categories = [...new Set(catalog.map((item) => item.category))].sort();
 
   res.json(categories);
 });
 
+// Read search filters from the request and return matching catalog items.
 router.get("/search", async (req, res) => {
   const query = typeof req.query.q === "string" ? req.query.q : "";
 
@@ -38,6 +42,7 @@ router.get("/search", async (req, res) => {
     return;
   }
 
+  // Search with the parsed filters and validated sort option.
   const results = await searchCatalog({
     query,
     category,

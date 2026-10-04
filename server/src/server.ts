@@ -1,3 +1,4 @@
+/** This file starts the Express server, provides a health check and mounts the search API routes. */
 import express from "express";
 
 import searchRouter from "./routes/search.js";
